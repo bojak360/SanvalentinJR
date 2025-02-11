@@ -1,0 +1,321 @@
+<!DOCTYPE html>  
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1115.0">
+    <title>❤️¡ Era obvio que dirías que sí !❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image:url(suntet.jpg);
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+        .main-message {
+            font-size: 2em;
+            color: #f10998;
+            font-weight: bold;
+            animation: zoomIn 1.5s;
+            position: absolute; top: 180px; left: 700px;
+        }
+        .message-container {
+            font-size: 1.5em;
+            color: #000000;
+            font-weight: bold;
+            position: absolute; top: 190px; left: 250px;
+            width: 600px;
+        }
+        .initial-image-container {
+            position: absolute; top: 350px; left: 830px;
+        }
+        .initial-image-container img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+        }
+        .image-container {
+            position: absolute; top: 350px; left: 830px;
+            display: none;
+        }
+        .image-container img {
+            width: 380px;
+            height: auto;
+            border-radius: 15px;
+            position: absolute; top: -220px; left: 330px;
+        }
+        .start-btn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: rgb(255, 118, 232);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: absolute; top: 680px; left: 940px;
+        }
+        .next-btn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: rgb(255, 118, 232);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: absolute; top: 750px; left: 495px;
+            display: none;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-message" id="main-message">❤️¡ Era obvio que dirías que sí !❤️</div>
+    <div class="message-container" id="message"></div>
+    
+    <!-- Imagen inicial -->
+    <div class="initial-image-container" id="initial-image">
+        <img src="foto5.jpg" alt="Imagen romántica">
+    </div>
+
+    <!-- Contenedor de imágenes para los mensajes -->
+    <div class="image-container" id="image-container">
+        <img id="image" src="" alt="Imagen romántica">
+    </div>
+
+    <button class="start-btn" onclick="startMessages()">Empezar</button>
+    <button class="next-btn" onclick="nextMessage()">Siguiente</button>
+
+    <script>
+        const messages = [
+            "Desde el momento en que entraste en mi vida supe que todo cambiaría, Contigo aprendí como se deberia ver el amor de verdad y lo que significa querer construir un futuro junto a alguien. Este es nuestro primer San Valentín y quiero recordarte cuánto significas para mí y cuánto valoro cada momento contigo y que No importa la distancia, el tiempo o las circunstancias yo siempre estare para ti cuidandote y desmostrandonte todos los dias cuanto te amo . ",
+            "De verdad espero que nunca olvides el amor que siento por ti porque amo todo de ti , Amo la manera que me miras con esos ojos hermosos tuyos , Amo que me hagas reír  o que sepas exactamente qué decir cuando me siento mal . Amo la forma en que me haces sentir que todo estará bien , amo cada palabra linda que sale de tu boca hacia ami me revuelve el mundo entero cuando las escucho , simplemente estoy completamente enamorado de ti  y no importa cuánto tiempo pase, cuántos días pasen, nunca quiero dejar de amarte, nunca quiero dejar de demostrarte lo mucho que significas para mí ya que No hay nadie más con quien quisiera compartir mis sueños, penas y mis alegrías, mis locuras y mi vida entera.",
+            "No hay nadie en este mundo como tú y no lo digo solo porque te amo sino porque lo pienso desde el primer dia y desde el primer momento en que te vi  supe que eras diferente, especial, alguien que no se parece a nadie más.Tienes algo que no puedo describir en palabras pero intentare hacerlo de alaguna manera. Una sonrisa capaz de cambiar el rumbo de mi día con solo aparecer y una forma de ser tan tuya y tan real , que me tiene completamente loco por ti ya que no hay nadie que piense, sienta, ame y sueñe como tú. Y eso es lo que te hace única.Amo tu manera de ver la vida, lo fuerte que eres y lo linda  que escondes en cada pequeño detalle. Amo que seas tú porque asi eres perfecta para mí.Gracias por existir, por enseñarme cada día que la vida es mucho más hermosa a tu lado , te amo con todo mi ser porque eres sin duda  la persona más especial que ha tocado mi vida , simplemente el amor de mi vida.",
+            "Este regalo puede que sea virtual pero lleva amor y mucho esfuerzo como cualquier otro y con el benificio que no importa el tiempo que pase este regalo sera eterno asique podras verlo cada ves que quieras acordarte de mi....pero aun asi yo se que no te gusta las cosas eternas y quieres vivir el momento como si fuera el ultimo asique hazme el favor de mirar abajo de tu almohada....."
+        ];
+        const images = [
+            "foto13.jpg",
+            "foto2.jpg",
+            "foto3.jpg",
+            "foto4.jpg"
+        ];
+        
+        let index = 0;
+        function startMessages() {
+            document.getElementById('main-message').style.display = 'none';
+            document.getElementById('initial-image').style.display = 'none';
+            document.getElementById('message').textContent = messages[index];
+            document.getElementById('image').src = images[index];
+            document.getElementById('image-container').style.display = 'block';
+            document.querySelector('.start-btn').style.display = 'none';
+            document.querySelector('.next-btn').style.display = 'block';
+        }
+        
+        function nextMessage() {
+            index = (index + 1) % messages.length;
+            document.getElementById('message').textContent = messages[index];
+            document.getElementById('image').src = images[index];
+        }
+    </script>
+    <body>
+        <!-- Aquí va tu código actual con mensajes e imágenes -->
+        
+        <!-- Pega aquí el código del mensaje final con la animación -->
+        <div id="final-screen" style="display: none; text-align: center; position: absolute; top: 350px; width: 100vw; height: 100vh;">
+            <h1 style="font-size: 3em; color: #f871b5;">💖 ¡Feliz San Valentín! 💖</h1>
+            <button onclick="endPage()" style="font-size: 1.5em; padding: 10px 20px; background-color: #f5f5f5; color: rgb(255, 122, 248); border: none; border-radius: 50px; cursor: pointer;">Fin</button>
+            <div id="collage-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden;"></div>
+        </div>
+    
+        <script>
+            function createHeart() {
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "absolute";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = Math.random() * window.innerHeight + "px";
+    heart.style.opacity = Math.random();
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 3000);
+}
+
+// Para hacer que aparezcan cuando se presione cualquier botón
+document.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", createHeart);
+});
+
+            function nextMessage() {
+                if (index < messages.length - 1) {
+                    index++;
+                    document.getElementById('message').textContent = messages[index];
+                    document.getElementById('image').src = images[index];
+                } else {
+                    // Oculta mensajes y muestra pantalla final
+                    document.getElementById('message').style.display = 'none';
+                    document.getElementById('image').style.display = 'none';
+                    document.querySelector('.next-btn').style.display = 'none';
+                    document.getElementById('final-screen').style.display = 'block';
+                    startCollage(); // Iniciar la animación infinita
+                }
+            }
+    
+            function startCollage() {
+                let collageContainer = document.getElementById('collage-container');
+                let collageImages = ["foto11.jpg", "foto12.jpg", "foto13.jpg", "foto14.jpg", "foto1.jpg ","foto2.jpg","foto3.jpg","foto4.jpg"]; // Agrega las imágenes que quieras
+    
+                function dropImage() {
+                    let img = document.createElement("img");
+                    let randomImage = collageImages[Math.floor(Math.random() * collageImages.length)];
+                    img.src = randomImage;
+                    img.style.position = "absolute";
+                    img.style.width = Math.random() * 120 + 80 + "px"; // Tamaño aleatorio (80px a 200px)
+                    img.style.left = Math.random() * window.innerWidth + "px"; // Posición aleatoria
+                    img.style.top = "-1400px"; // Empieza desde arriba
+                    img.style.opacity = Math.random() * 0.8 + 0.2; // Opacidad aleatoria
+                    img.style.transition = "top 4s linear"; // Velocidad de caída
+                    collageContainer.appendChild(img);
+    
+                    // Hace que caigan hasta el fondo y luego desaparezcan
+                    setTimeout(() => {
+                        img.style.top = window.innerHeight + "px";
+                    }, 100);
+    
+                    // Elimina la imagen después de que cae y la vuelve a generar
+                    setTimeout(() => {
+                        img.remove();
+                        dropImage(); // Se llama a sí misma para repetir
+                    }, 4000);
+                }
+    
+                // Generar imágenes continuamente
+                setInterval(dropImage, 1500); // Cada 0.5 segundos cae una imagen
+            }
+    
+            function endPage() {
+                alert("💖 Gracias por ver este regalo, te amo 💖")
+            }
+        </script>
+
+    </html>
+    
+</body>
+</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Música 🎶</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe4e1;
+        }
+        
+        /* 🎵 Estilos del reproductor */
+        #music-player {
+            position: fixed;
+            top: 25px;
+            right: 79%;
+            transform: translateX(-50%);
+            background: rgba(245, 159, 219, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #play-pause-btn {
+            background: none;
+            border: none;
+            font-size: 10px;
+            cursor: pointer;
+            padding: 4px 6px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- 🎵 Reproductor de Música -->
+    <div id="music-player">
+        <button id="play-pause-btn">▶</button>
+        <span id="song-info">💖 DUKI-Emilia -como si no importara 💖</span>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="duki.mp3" type="audio/mpeg">
+       
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("background-music");
+            const playPauseBtn = document.getElementById("play-pause-btn");
+
+            // 🔹 Recuperar el estado de la música
+            if (localStorage.getItem("isPlaying") === "true") {
+                audio.currentTime = parseFloat(localStorage.getItem("musicTime")) || 0;
+                audio.play().then(() => {
+                    playPauseBtn.textContent = "⏸";
+                }).catch(() => {
+                    console.log("Autoplay bloqueado, esperando interacción...");
+                });
+            }
+
+            // 🔹 Guardar el tiempo cuando el usuario cambia de página
+            window.addEventListener("beforeunload", () => {
+                localStorage.setItem("musicTime", audio.currentTime);
+            });
+
+            // 🔹 Iniciar música con clic en cualquier parte de la página
+            function startMusic() {
+                audio.play().then(() => {
+                    playPauseBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                }).catch(err => console.log("No se pudo iniciar la música:", err));
+
+                // Remover el evento después del primer clic
+                document.removeEventListener("click", startMusic);
+            }
+
+            document.addEventListener("click", startMusic);
+
+            // 🔹 Botón de Play/Pause
+            playPauseBtn.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                } else {
+                    audio.pause();
+                    playPauseBtn.textContent = "▶";
+                    localStorage.setItem("isPlaying", "false");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+</html>
+
+</html>

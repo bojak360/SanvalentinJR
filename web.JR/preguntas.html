@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1115.0">
+    <title>💖 Preguntas 💖</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(suntet.jpg);
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+        .question-container {
+            font-size: 3.0em;
+            color: #3d0725;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+        }
+        .btn {
+            font-size: 2em;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: rgb(255, 118, 232);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: absolute; top: 600px; left: 800px;
+        }
+        #no-btn {
+            position: absolute; top: 600px; left: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="question-container" id="question-text">❤️👀¿Me amas mucho?👀❤️</div>
+    <div class="buttons-container">
+        <button class="btn" id="yes-btn" onclick="nextQuestion()">Sí</button>
+        <button class="btn" id="no-btn" onmouseover="moveNoButton()">No</button>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        const questions = [
+            "¿me amas mucho?",
+            "❤️¿Piensas en mí todos los días?😳❤️",
+            "❤️¿Eres feliz a mi lado?❤️",
+            "❤️¿Te gustaría pasar toda la vida conmigo?🤭❤️",
+            "❤️🌻¿ Mi amor quieres ser mi San Valentín? 🌻❤️"
+        ];
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.getElementById("question-text").textContent = questions[currentQuestion];
+            } else {
+                window.location.href = "message.html"; // Ir a la siguiente página
+            }
+        }
+
+        function moveNoButton() {
+            let noBtn = document.getElementById("no-btn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+    </script>
+
+</body>
+</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Música 🎶</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe4e1;
+        }
+        
+        /* 🎵 Estilos del reproductor */
+        #music-player {
+            position: fixed;
+            top: 46px;
+            left: 85%;
+            transform: translateX(-50%);
+            background: rgba(245, 159, 219, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #play-pause-btn {
+            background: none;
+            border: none;
+            font-size: 10px;
+            cursor: pointer;
+            padding: 4px 6px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- 🎵 Reproductor de Música -->
+    <div id="music-player">
+        <button id="play-pause-btn">▶</button>
+        <span id="song-info">💖 DUKI-Emilia -como si no importara 💖</span>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="duki.mp3" type="audio/mpeg">
+       
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("background-music");
+            const playPauseBtn = document.getElementById("play-pause-btn");
+
+            // 🔹 Recuperar el estado de la música
+            if (localStorage.getItem("isPlaying") === "true") {
+                audio.currentTime = parseFloat(localStorage.getItem("musicTime")) || 0;
+                audio.play().then(() => {
+                    playPauseBtn.textContent = "⏸";
+                }).catch(() => {
+                    console.log("Autoplay bloqueado, esperando interacción...");
+                });
+            }
+
+            // 🔹 Guardar el tiempo cuando el usuario cambia de página
+            window.addEventListener("beforeunload", () => {
+                localStorage.setItem("musicTime", audio.currentTime);
+            });
+
+            // 🔹 Iniciar música con clic en cualquier parte de la página
+            function startMusic() {
+                audio.play().then(() => {
+                    playPauseBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                }).catch(err => console.log("No se pudo iniciar la música:", err));
+
+                // Remover el evento después del primer clic
+                document.removeEventListener("click", startMusic);
+            }
+
+            document.addEventListener("click", startMusic);
+
+            // 🔹 Botón de Play/Pause
+            playPauseBtn.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                } else {
+                    audio.pause();
+                    playPauseBtn.textContent = "▶";
+                    localStorage.setItem("isPlaying", "false");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+</html>
+
+</html>
