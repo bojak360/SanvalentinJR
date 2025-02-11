@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1115.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image:url(suntet.jpg);
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            color: #770977;
+            font-size: 2.5em;
+            position: absolute;top: 270px; left: 620px;
+        }
+        .buttons {
+            margin-top: 9px;
+        }
+        button {
+            font-size: 1em;
+            padding: 50px 60px;
+            margin: 10px;
+            border: none;
+            border-radius: 320px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .yes {
+            background-color: #ffffff;
+            color: rgb(255, 162, 232);
+            font-weight: bold;
+            position: absolute;top: 550px; left: 600px;
+        }
+        .no {
+            background-color: #ffffff;
+            color: rgb(255, 152, 246);
+            font-weight: bold;
+            position: absolute;top: 550px; left: 1100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌷❤️ ¿estas lista amor? 🌷❤️</h1>
+    <div class="buttons">
+        <button class="yes" onclick="redirectToMessage()">Sí</button>
+        <button class="no" onmouseover="moveButton()">No</button>
+        
+        
+    </div>
+
+    <script>
+        
+        function moveButton() {
+            const button = document.querySelector('.no');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+        
+        function redirectToMessage() {
+            window.location.href = "minijuego.html";
+        }
+    </script>
+    
+    
+</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Música 🎶</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe4e1;
+        }
+        
+        /* 🎵 Estilos del reproductor */
+        #music-player {
+            position: fixed;
+            top: 46px;
+            left: 85%;
+            transform: translateX(-50%);
+            background: rgba(245, 159, 219, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #play-pause-btn {
+            background: none;
+            border: none;
+            font-size: 10px;
+            cursor: pointer;
+            padding: 4px 6px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- 🎵 Reproductor de Música -->
+    <div id="music-player">
+        <button id="play-pause-btn">▶</button>
+        <span id="song-info">💖 DUKI-Emilia -como si no importara 💖</span>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="duki.mp3" type="audio/mpeg">
+       
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("background-music");
+            const playPauseBtn = document.getElementById("play-pause-btn");
+
+            // 🔹 Recuperar el estado de la música
+            if (localStorage.getItem("isPlaying") === "true") {
+                audio.currentTime = parseFloat(localStorage.getItem("musicTime")) || 0;
+                audio.play().then(() => {
+                    playPauseBtn.textContent = "⏸";
+                }).catch(() => {
+                    console.log("Autoplay bloqueado, esperando interacción...");
+                });
+            }
+
+            // 🔹 Guardar el tiempo cuando el usuario cambia de página
+            window.addEventListener("beforeunload", () => {
+                localStorage.setItem("musicTime", audio.currentTime);
+            });
+
+            // 🔹 Iniciar música con clic en cualquier parte de la página
+            function startMusic() {
+                audio.play().then(() => {
+                    playPauseBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                }).catch(err => console.log("No se pudo iniciar la música:", err));
+
+                // Remover el evento después del primer clic
+                document.removeEventListener("click", startMusic);
+            }
+
+            document.addEventListener("click", startMusic);
+
+            // 🔹 Botón de Play/Pause
+            playPauseBtn.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                } else {
+                    audio.pause();
+                    playPauseBtn.textContent = "▶";
+                    localStorage.setItem("isPlaying", "false");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+</html>
